@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .item-header{
+            font-size: 30px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+    </div>
+<script src="./vdom.js"></script>
+<script>
+
+
+    //刚才我们已经通过createElement函数生成了虚拟DOM
+    //这些虚拟DOM 的节点上可能还有一些属性 
+    let vnode = createElement('div',{id:'test'},[
+        createElement('p',{key:'a',style:{color:'red'}},'节点1'),
+        createElement('p',{key:'b','@click':() => {alert('xx')}},'节点2'),
+        createElement('p',{key:'c','class':'item-header'},'节点3'),
+        createElement('p',{key:'d'},'节点4')
+    ])
+    let vnode1 = createElement('div',{id:'test'},[
+        createElement('p',{key:'d'},'节点4'),
+        createElement('p',{key:'a',style:{color:'blue'}},'节点1'),
+        createElement('p',{key:'b'},'节点2'),
+        createElement('p',{key:'c','class':'item-header'},'节点5'),
+        createElement('p',{key:'e',style:{color:'#bbb'}},'节点6')
+    ])
+    
+    //在这里我们需要用render函数 把他们 都渲染到页面上
+    render(vnode,document.querySelector('#app'))
+   
+        setTimeout(() => {
+            render(vnode1,document.querySelector('#app'))
+        },2000)
+
+</script>
+
+</body>
+</html>
